@@ -1,0 +1,9 @@
+<!--    <div class="playlist">  &lt;!&ndash;  playlist&ndash;&gt;-->
+      {% if tracks %}
+      {% for track in tracks %}
+        {% include "app_main/track_row.html" %}
+      {% endfor %}
+      {% else %}
+
+      {% endif %}
+<!--    </div> &lt;!&ndash;  / playlist&ndash;&gt;-->

@@ -1,0 +1,40 @@
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = False
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = ''
+
+ALLOWED_HOSTS = ''
+
+# Flag for local dev HTTPS test
+LOCAL_HTTPS_TEST = False
+
+# Database configuration
+POSTGRES_HOST = ''
+POSTGRES_PORT = 5432
+POSTGRES_DB = ''
+POSTGRES_USER = ''
+POSTGRES_PASSWORD = ''
+
+# social_django
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
+SOCIAL_AUTH_FACEBOOK_KEY = ''
+SOCIAL_AUTH_FACEBOOK_SECRET = ''
+
+# email
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+
+# celery
+BROKER_PROTOCOL = 'redis'
+BROKER_HOST = 'audio-editor-backend-redis'
+BROKER_PORT = 6379
+
+CELERY_BROKER_URL = f'{BROKER_PROTOCOL}://{BROKER_HOST}:{BROKER_PORT}'
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+
+# media
+PLACEHOLDER_TRACK_FILENAME = 'Apex_-_Inner_Space.mp3'

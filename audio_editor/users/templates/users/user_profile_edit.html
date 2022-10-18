@@ -1,0 +1,71 @@
+{% extends 'base_navbartop.html' %}
+
+{% block head %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/navbartop_tweaks.css' %}">
+  <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+  <script src="{% static 'js/user_profile_edit.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+  {% load widget_tweaks %}
+
+  {% block inner_navbar %}
+    <div class="inner-navbartop">
+      <div class="container">
+        <div class="row row-padding">
+          <div class="pull-right">
+            <a href="{% url 'about_us' %}" class="inner-navbartop-href">About Us</a>
+            <span class="separator-padding">|</span>
+            <a href="{% url 'contact_us' %}" class="inner-navbartop-href">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+
+  <div class="container">
+    <div class="profile-header">
+
+      <div class="image-container width-100"> <!--avatar background image-->
+        {% if profile.bg_picture %}
+        <img align="left" id="profile-bg-image" src="{{ profile.bg_picture.url }}"/>
+        {% else %}
+        <img align="left" id="profile-bg-image" src="{% static 'placeholder_media/profile_bg_placeholder.jpeg' %}"/>
+        {% endif %}
+        <div id="profile-bg-picker" class="pic-upload-btn btn btn-primary">
+          <span class="glyphicon glyphicon-edit"></span>
+          <form id="avatar-bg-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="change_bg">
+            {{ form.bg_picture|add_class:"upload-input"}}
+          </form>
+        </div>
+      </div>
+
+      <div> <!--avatar and basic info-->
+        <div class="image-container avatar-placed">
+          {% if profile.avatar %}
+          <img align="left" id="avatar-pic" class="thumbnail mb-0" src="{{ profile.avatar.url }}"/>
+          {% else %}
+          <img align="left" id="avatar-pic" class="thumbnail mb-0" src="{% static 'placeholder_media/avatar_placeholder.png' %}"/>
+          {% endif %}
+          <div id="avatar-div" class="behind-pic-btn"></div>
+          <form id="avatar-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="change_avatar">
+            {{ form.avatar|add_class:"upload-input"}}
+          </form>
+        </div>
+
+        <div class="profile-text">
+          <h1>{{ profile.user.username }}</h1>
+          <p>Moto</p>
+        </div>
+      </div>
+
+    </div> <!-- /profile-header -->
+  </div> <!-- /container -->
+
+{% endblock %}

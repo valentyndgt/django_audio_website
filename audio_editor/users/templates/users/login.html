@@ -1,0 +1,53 @@
+{% extends 'base_navbartop_plain.html' %}
+
+{% block head %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/login_style.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="container mb-20px">
+    <div class="col-sm-8 col-centered bg-ghostwhite">
+        <h2>Log In</h2>
+        <div class="mx-auto social-container 2 order-md-1"> <!-- col-md-8 -->
+           <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger btn-social-login mb-2">Login with Google</a>
+           <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary btn-social-login mb-2">Login with Facebook</a>
+        </div>
+        <form method="post">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="login">
+          <div class="form-group">
+            {{ form.username.label_tag }}
+            <p>{{ form.username }}</p>
+          </div>
+          <div class="form-group">
+            {{ form.password.label_tag }}
+            <p>{{ form.password }}</p>
+          </div>
+          <input type="submit" value="login" class="btn btn-success pull-right">
+          <input type="hidden" name="next" value="{{ next }}">
+        </form><hr/>
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <br/>
+    <div class="col-sm-8 col-centered">
+      <a href="{% url 'signup' %}">New here? Sign Up</a>
+    </div>
+    <div class="col-sm-8 col-centered">
+      <a href="{% url 'password_reset' %}" class="pull-right">Forgot password?</a>
+    </div>
+  </div>
+{% endblock %}

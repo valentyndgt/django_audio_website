@@ -1,0 +1,14 @@
+      <div class="playlist-row">
+        <div class="inline small-play-toggle-btn">
+          <span class="glyphicon glyphicon-play"></span>
+        </div>
+        <div class="inline-block small-track-title">
+          <span class="track-id" value="{{ track.id }}"></span>
+          <a class="playlist-track" href="stream/{{ track.filename }}/">{{ track.name }}</a>
+        </div>
+        <div class="nodisplay track-row-right-buttons pull-right">
+          <span class="btn-edit-trackname glyphicon glyphicon-pencil"></span>
+          <a href="{% url 'download_track' track_id=track.id %}"><span class="btn-download-track glyphicon glyphicon-save"></span></a>
+          <span class="btn-remove-track glyphicon glyphicon-remove"></span>
+        </div>
+      </div>
